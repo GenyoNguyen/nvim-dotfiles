@@ -70,15 +70,58 @@ return {
         end
 
         -- configure python server
-        lspconfig["ruff_lsp"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
+        --lspconfig["ruff_lsp"].setup({
+        --    capabilities = capabilities,
+        --    on_attach = on_attach,
+        --    init_options = {
+        --      settings = {
+        --        interpreter = {'/home/genyonguyen/Desktop/CS115/bin/python3'},
+        --        configurationPreference = "editorFirst"
+        --      }
+        --    }
+        --})
+
+        --lspconfig["ruff"].setup({
+        --  capabilities = capabilities,
+        --  on_attach = on_attach,
+        --})
+
+        lspconfig["texlab"].setup({
+          capabilities = capabilities,
+          on_attach = on_attach,
         })
 
         -- configure python server
         lspconfig["pyright"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
+        })
+
+        lspconfig["html"].setup({
+          capabilities = capabilities,
+          on_attach = on_attach,
+        })
+
+        lspconfig["cssls"].setup({
+          capabilities = capabilities,
+          on_attach = on_attach,
+        })
+
+        -- configure javascript server
+        lspconfig["ts_ls"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        lspconfig["eslint"].setup({
+          --- ...
+          capabilities = capabilities,
+          on_attach = function(client, bufnr)
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = bufnr,
+              command = "EslintFixAll",
+            })
+          end,
         })
 
         -- configure lua server (with special settings)

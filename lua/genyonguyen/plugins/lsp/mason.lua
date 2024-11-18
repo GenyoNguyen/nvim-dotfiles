@@ -28,9 +28,12 @@ return {
       -- list of servers for mason to install
       ensure_installed = {
         "lua_ls",
-        "ruff_lsp",
+        --"ruff_lsp",
         "pyright",
         "clangd",
+        "html",
+        "cssls",
+        "ts_ls",
       },
       -- auto-install configured servers (with lspconfig)
       automatic_installation = true, -- not the same as ensure_installed
@@ -40,7 +43,9 @@ return {
       ensure_installed = {
         "stylua", -- lua formatter
         "pylint", -- python linter
-        "ruff",
+        --"ruff",
+        "ts_ls",
+        "eslint-lsp",
       },
     })
   end,

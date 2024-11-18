@@ -2,6 +2,12 @@ vim.opt.number = true
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
 
+-- ***Custom keybinds
+vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
+vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
+vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
+vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
+
 
 -- ***Remap for barbar.nvim
 local map = vim.api.nvim_set_keymap
@@ -49,3 +55,8 @@ map('n', '<Leader>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
+
+-- Jukit
+map('n', '<Leader>oo', ':JukitOut source ~/Desktop/CS115/.venv/bin/activate<CR>', opts)
+map('n', '<Leader>l', ':call jukit#send#line()<CR>', opts)
+map('v', '<Leader>l', ':<C-U>call jukit#send#line()<CR>', opts)
