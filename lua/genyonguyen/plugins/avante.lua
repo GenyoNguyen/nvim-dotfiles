@@ -5,58 +5,60 @@ return {
   opts = {
     -- add any opts here
     -- for example
-    openai = {
-        hide_in_model_selector = true,
-    },
-    claude = {
-        hide_in_model_selector = true,
-    },
-    gemini = {
-        hide_in_model_selector = true,
-    },
-    vertex = {
-        hide_in_model_selector = true,
-    },
-    vertex_claude = {
-        hide_in_model_selector = true,
-    },
-    cohere = {
-        hide_in_model_selector = true,
-    },
-    bedrock = {
-        hide_in_model_selector = true,
-    },
-    -- other providers
-    ["claude-opus"] = {
-      hide_in_model_selector = true,
-    },
-    ["claude-haiku"] = {
-      hide_in_model_selector = true,
-    },
-    ["openai-gpt-4o-mini"] = {
-      hide_in_model_selector = true,
-    },
-    vendors = {
-      copilot_claude = {
-        __inherited_from = 'copilot',
-        model = "claude-3.5-sonnet",
-        temperature = 1,
-        max_tokens = 20000
+    providers = {
+      openai = {
+          hide_in_model_selector = true,
       },
-      copilot_claude_thinking = {
-        __inherited_from = 'copilot',
-        model = "claude-3.7-sonnet-thought",
-        temperature = 1,
-        max_tokens = 20000
+      claude = {
+          hide_in_model_selector = true,
       },
-      copilot_openai = {
-        __inherited_from = 'copilot',
-        model = "gpt-4o"
+      gemini = {
+          hide_in_model_selector = true,
       },
-      copilot_gemini = {
-        __inherited_from = 'copilot',
-        model = "gemini-2.0-flash-001"
-      }
+      vertex = {
+          hide_in_model_selector = true,
+      },
+      vertex_claude = {
+          hide_in_model_selector = true,
+      },
+      cohere = {
+          hide_in_model_selector = true,
+      },
+      bedrock = {
+          hide_in_model_selector = true,
+      },
+      -- other providers
+      ["claude-opus"] = {
+        hide_in_model_selector = true,
+      },
+      ["claude-haiku"] = {
+        hide_in_model_selector = true,
+      },
+      ["openai-gpt-4o-mini"] = {
+        hide_in_model_selector = true,
+      },
+      vendors = {
+        copilot_claude = {
+          __inherited_from = 'copilot',
+          model = "claude-3.5-sonnet",
+          temperature = 1,
+          max_tokens = 20000
+        },
+        copilot_claude_thinking = {
+          __inherited_from = 'copilot',
+          model = "claude-3.7-sonnet-thought",
+          temperature = 1,
+          max_tokens = 20000
+        },
+        copilot_openai = {
+          __inherited_from = 'copilot',
+          model = "gpt-4o"
+        },
+        copilot_gemini = {
+          __inherited_from = 'copilot',
+          model = "gemini-2.0-flash-001"
+        }
+      },
     }
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
