@@ -56,7 +56,8 @@ map('n', '<Leader>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 
--- Jukit
-map('n', '<Leader>oo', ':JukitOut source ~/Desktop/CS115/.venv/bin/activate<CR>', opts)
-map('n', '<Leader>l', ':call jukit#send#line()<CR>', opts)
-map('v', '<Leader>l', ':<C-U>call jukit#send#line()<CR>', opts)
+-- Telescope
+map('n', '<leader>sf', ":Telescope find_files<CR>", opts)
+map('n', '<leader>sg', ":Telescope live_grep<CR>", opts)
+map('n', '<leader>sb', ":Telescope buffers<CR>", opts)
+map('n', '<leader>sh', ":Telescope help_tags<CR>", opts)

@@ -12,5 +12,3 @@ vim.g.jukit_terminal = 'kitty'
 --    }
 --  }
 --}
-
-vim.g.python3_host_prog = "~/Desktop/CS115/.venv/bin/python3"

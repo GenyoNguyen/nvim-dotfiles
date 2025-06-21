@@ -19,11 +19,9 @@ return {
       sort = {
         sorter = "case_sensitive",
       },
-      view = {
-        width = 30,
-      },
+      view = { adaptive_size = true },
       renderer = {
-        group_empty = true,
+        group_empty = false,
       },
       filters = {
         dotfiles = true,

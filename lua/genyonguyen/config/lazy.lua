@@ -15,9 +15,6 @@ require("lazy").setup({
   {import = "genyonguyen.plugins"},
   {import = "genyonguyen.plugins.lsp"}
 }, {
-  install = {
-    colorscheme = { "catppuccin" },
-  },
   checker = {
     enabled = true,
     notify = false,
@@ -28,3 +25,6 @@ require("lazy").setup({
 })
 
 vim.api.nvim_command('TSEnable highlight')
+
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3

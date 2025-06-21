@@ -86,6 +86,11 @@ return {
         --  on_attach = on_attach,
         --})
 
+        lspconfig["rust_analyzer"].setup({
+          capabilities = capabilities,
+          on_attach = on_attach,
+        })
+
         lspconfig["texlab"].setup({
           capabilities = capabilities,
           on_attach = on_attach,
@@ -111,6 +116,16 @@ return {
         lspconfig["ts_ls"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
+        })
+
+        lspconfig["tailwindcss"].setup({
+          capabilities = capabilities,
+          on_attach = on_attach,
+        })
+
+        lspconfig["prismals"].setup({
+          capabilities = capabilities,
+          on_attach = on_attach,
         })
 
         lspconfig["eslint"].setup({
@@ -139,6 +154,7 @@ return {
                         library = {
                             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                             [vim.fn.stdpath("config") .. "/lua"] = true,
+                            [vim.fn.expand "${3rd}/love2d/library"] = true,
                         },
                     },
                 },
@@ -147,5 +163,26 @@ return {
 
         lspconfig["clangd"].setup({
         })
+
+        --Bash
+        lspconfig["bashls"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        lspconfig["efm"].setup({
+          init_options={ documentFormatting=true },
+          filetypes = { 'python','cpp','lua' },
+          settings={
+            rootMarkers={".git/"},
+            languages={
+              sh={
+                {lintCommand='shellcheck -f gcc -x'}
+              }
+            }
+
+          }
+        })
+
     end,
 }
