@@ -12,8 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {import = "genyonguyen.plugins"},
-  {import = "genyonguyen.plugins.lsp"}
+  { import = "genyonguyen.plugins" }
 }, {
   checker = {
     enabled = true,
@@ -23,8 +22,3 @@ require("lazy").setup({
     notify = false,
   },
 })
-
-vim.api.nvim_command('TSEnable highlight')
-
--- views can only be fully collapsed with the global statusline
-vim.opt.laststatus = 3

@@ -1,40 +1,81 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  config = function ()
-    require("nvim-treesitter").setup({
-      -- A list of parser names, or "all" (the five listed parsers should always be installed)
-      ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query", "python", "javascript", "typescript", "tsx", "rust", "css", "html" },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPre", "BufNewFile" },
+		build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				-- A list of parser names, or "all" (the five listed parsers should always be installed)
+				ensure_installed = {
+					"json",
+					"javascript",
+					"typescript",
+					"tsx",
+					"go",
+					"yaml",
+					"html",
+					"css",
+					"python",
+					"http",
+					"prisma",
+					"markdown",
+					"markdown_inline",
+					"svelte",
+					"graphql",
+					"bash",
+					"lua",
+					"vim",
+					"vimdoc",
+					"dockerfile",
+					"gitignore",
+					"query",
+					"vimdoc",
+					"c",
+					"cpp",
+					"java",
+					"rust",
+				},
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "<C-space>",
+						node_incremental = "<C-space>",
+						scope_incremental = false,
+					},
+				},
+				additional_vim_regex_highlighting = false,
+				highlight = {
+					enable = true,
+				},
 
-      -- Install parsers synchronously (only applied to `ensure_installed`)
-      sync_install = false,
-
-      -- Automatically install missing parsers when entering buffer
-      -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-      auto_install = true,
-
-      -- List of parsers to ignore installing (or "all")
-      -- ignore_install = { "javascript" },
-
-      ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-      -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-      highlight = {
-        enable = true,
-
-        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-        -- the name of the parser)
-        -- list of language that will be disabled
-        -- disable = { "c", "rust" },
-        -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false
-      },
-
-    })
-  end,
+				indent = {
+					enable = true,
+				},
+			})
+		end,
+	},
+	-- NOTE: js,ts,jsx,tsx Auto Close Tags
+	{
+		"windwp/nvim-ts-autotag",
+		enabled = true,
+		ft = { "html", "xml", "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte" },
+		config = function()
+			-- Independent nvim-ts-autotag setup
+			require("nvim-ts-autotag").setup({
+				opts = {
+					enable_close = true, -- Auto-close tags
+					enable_rename = true, -- Auto-rename pairs
+					enable_close_on_slash = false, -- Disable auto-close on trailing `</`
+				},
+				per_filetype = {
+					["html"] = {
+						enable_close = true, -- Disable auto-closing for HTML
+					},
+					["typescriptreact"] = {
+						enable_close = true, -- Explicitly enable auto-closing (optional, defaults to `true`)
+					},
+				},
+			})
+		end,
+	},
 }

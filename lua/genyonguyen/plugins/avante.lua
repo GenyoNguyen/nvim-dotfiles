@@ -2,19 +2,12 @@ return {
   "yetone/avante.nvim",
   event = "VeryLazy",
   version = false, -- Never set this value to "*"! Never!
+  --@module 'avante'
   opts = {
     -- add any opts here
     -- for example
+    provider = "copilot", -- default provider
     providers = {
-      openai = {
-          hide_in_model_selector = true,
-      },
-      claude = {
-          hide_in_model_selector = true,
-      },
-      gemini = {
-          hide_in_model_selector = true,
-      },
       vertex = {
           hide_in_model_selector = true,
       },
@@ -36,28 +29,6 @@ return {
       },
       ["openai-gpt-4o-mini"] = {
         hide_in_model_selector = true,
-      },
-      vendors = {
-        copilot_claude = {
-          __inherited_from = 'copilot',
-          model = "claude-3.5-sonnet",
-          temperature = 1,
-          max_tokens = 20000
-        },
-        copilot_claude_thinking = {
-          __inherited_from = 'copilot',
-          model = "claude-3.7-sonnet-thought",
-          temperature = 1,
-          max_tokens = 20000
-        },
-        copilot_openai = {
-          __inherited_from = 'copilot',
-          model = "gpt-4o"
-        },
-        copilot_gemini = {
-          __inherited_from = 'copilot',
-          model = "gemini-2.0-flash-001"
-        }
       },
     }
   },
