@@ -4,6 +4,13 @@ return {
 		priority = 1000,
 		lazy = false,
 		opts = {
+			image = {
+				math = {
+					latex = {
+						font_size = "large",
+					},
+				},
+			},
 			quickfile = {
 				enabled = true,
 				exclude = { "latex" },

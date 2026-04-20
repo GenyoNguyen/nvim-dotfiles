@@ -8,39 +8,6 @@ return {
 		-- Configure custom linters using Mason-managed tools
 		local mason_bin_dir = vim.fn.stdpath("data") .. "/mason/bin"
 
-		-- Configure Laravel Pint for linting (using --test mode)
-		local pint_cmd = vim.fn.executable(mason_bin_dir .. "/pint") == 1 and mason_bin_dir .. "/pint" or "pint"
-
-		lint.linters.pint = {
-			name = "pint",
-			cmd = pint_cmd,
-			stdin = false,
-			args = { "--test" },
-			stream = "stderr", -- Pint outputs diagnostics to stderr
-			ignore_exitcode = true,
-			parser = function(output, bufnr)
-				local diagnostics = {}
-
-				if not output or output == "" then
-					return diagnostics
-				end
-
-				-- Check if output contains style issues
-				-- Pint outputs human-readable format by default when there are issues
-				if string.find(output, "FAIL") or string.find(output, "differs") then
-					table.insert(diagnostics, {
-						lnum = 0,
-						col = 0,
-						message = "Code style issues found - run formatter to fix",
-						severity = vim.diagnostic.severity.WARN,
-						source = "pint",
-					})
-				end
-
-				return diagnostics
-			end,
-		}
-
 		-- Configure ESLint D
 		lint.linters.eslint_d.args = {
 			"--no-warn-ignored",
@@ -52,6 +19,41 @@ return {
 				return vim.fn.expand("%:p")
 			end,
 		}
+
+		-- Configure biber
+		lint.linters.biber = {
+			cmd = "biber",
+			args = function()
+				-- biber needs a .bcf file, but for linting .bib directly:
+				return { "--tool", vim.fn.expand("%:p") }
+			end,
+			stdin = false,
+			stream = "stdout",
+			ignore_exitcode = true,
+			parser = function(output, bufnr)
+				local diagnostics = {}
+				for line in output:gmatch("[^\r\n]+") do
+					local filename, lnum, col, msg = line:match("([^:]+):(%d+):(%d+):%s*(.*)")
+					if filename then
+						table.insert(diagnostics, {
+							lnum = tonumber(lnum) - 1,
+							col = tonumber(col) - 1,
+							message = msg,
+							severity = vim.diagnostic.severity.WARN,
+							source = "biber",
+						})
+					end
+				end
+				return diagnostics
+			end,
+		}
+
+		-- Configure chktex
+		lint.linters.chktex = vim.tbl_extend("force", lint.linters.chktex, {
+			ignore_exitcode = true,
+		})
+
+		-- Configure luacheck
 
 		-- Configure linters by filetype (using Mason-managed tools)
 		lint.linters_by_ft = {
@@ -65,19 +67,19 @@ return {
 			typescriptreact = { "eslint_d" },
 
 			-- Lua
-			lua = { "luacheck" },
+			-- lua = { "luacheck" },
 
 			-- Shell
 			sh = { "shellcheck" },
 			bash = { "shellcheck" },
 			zsh = { "shellcheck" },
 
-			-- PHP/Laravel
-			php = { "pint" },
-
 			-- You can add more linters here as needed
-			python = { "pylint" },
+			-- python = { "pyrefly" },
 			-- rust = { "clippy" },
+
+			tex = { "chktex" },
+			bib = { "biber" },
 		}
 
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {

@@ -26,24 +26,27 @@ return {
 				},
 			},
 			formatters_by_ft = {
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
-				css = { "prettier" },
-				html = { "prettier" },
-				svelte = { "prettier" },
-				json = { "prettier" },
-				yaml = { "prettier" },
+				javascript = { "prettierd" },
+				typescript = { "prettierd" },
+				javascriptreact = { "prettierd" },
+				typescriptreact = { "prettierd" },
+				css = { "prettierd" },
+				html = { "prettierd" },
+				svelte = { "prettierd" },
+				json = { "prettierd" },
+				yaml = { "prettierd" },
 				lua = { "stylua" },
-				python = { "black" },
-				markdown = { "prettier", "markdown-toc" },
-				-- ["markdown.mdx"] = { "prettier", "markdownlint", "markdown-toc" },
+				python = { "black", "isort", "autoflake" },
+				markdown = { "prettierd", "markdown-toc" },
+				-- ["markdown.mdx"] = { "prettierd", "markdownlint", "markdown-toc" },
+				tex = { "latexindent" },
+				bib = { "bibtex-tidy" },
+				rust = { "rustfmt" },
 			},
 		})
 
 		-- Configure individual formatters
-		conform.formatters.prettier = {
+		conform.formatters.prettierd = {
 			args = {
 				"--stdin-filepath",
 				"$FILENAME",
@@ -59,6 +62,9 @@ return {
 
 		local format_on_save_filetypes = {
 			"lua",
+			"tex",
+			"bib",
+			"rust",
 		}
 
 		vim.api.nvim_create_autocmd("BufWritePre", {

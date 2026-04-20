@@ -1,8 +1,12 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		commit = "90cd6580e720caedacb91fdd587b747a6e77d61f",
 		event = { "BufReadPre", "BufNewFile" },
 		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -51,6 +55,54 @@ return {
 				indent = {
 					enable = true,
 				},
+				textobjects = {
+					move = {
+						enable = true,
+						set_jumps = false, -- you can change this if you want.
+						goto_next_start = {},
+						goto_previous_start = {},
+					},
+					select = {
+						enable = true,
+						lookahead = true, -- you can change this if you want
+						keymaps = {
+							--- ... other keymaps
+							["ib"] = { query = "@code_cell.inner", desc = "in block" },
+							["ab"] = { query = "@code_cell.outer", desc = "around block" },
+						},
+					},
+					swap = { -- Swap only works with code blocks that are under the same
+						-- markdown header
+						enable = true,
+						swap_next = {
+							--- ... other keymap
+							["<leader>sbl"] = "@code_cell.outer",
+						},
+						swap_previous = {
+							--- ... other keymap
+							["<leader>sbh"] = "@code_cell.outer",
+						},
+					},
+				},
+			})
+
+			vim.keymap.set("n", "]b", function()
+				require("nvim-treesitter.textobjects.move").goto_next_start("@code_cell.inner")
+				vim.cmd("normal! zz")
+			end, { silent = true, desc = "Next code cell" })
+
+			vim.keymap.set("n", "[b", function()
+				require("nvim-treesitter.textobjects.move").goto_previous_start("@code_cell.inner")
+				vim.cmd("normal! zz")
+			end, { silent = true, desc = "Previous code cell" })
+		end,
+	},
+	-- NOTE: Show code context at the top
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		config = function()
+			require("treesitter-context").setup({
+				enable = true,
 			})
 		end,
 	},

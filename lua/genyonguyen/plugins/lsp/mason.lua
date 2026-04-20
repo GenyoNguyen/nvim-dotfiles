@@ -7,11 +7,10 @@ return {
 				"lua_ls", -- Lua LSP
 				"ts_ls", -- TypeScript LSP
 				"rust_analyzer", -- Rust LSP
-				"intelephense", -- PHP LSP
 				"tailwindcss", -- Tailwind CSS LSP
 				"html", -- HTML LSP
 				"cssls", -- CSS LSP
-				"pyright", -- Python LSP
+				-- "ruff", -- Python LSP
 			},
 		},
 		dependencies = {
@@ -39,12 +38,12 @@ return {
 				"prettier",
 				"black",
 				"isort",
+				"latexindent",
+				"bibtex-tidy",
 
 				-- Linters and diagnostics
 				"eslint_d",
 				"luacheck", -- Lua linting
-				"pint", -- Laravel Pint for PHP (formatting & linting)
-				"pylint",
 
 				-- Additional useful tools
 				"shfmt", -- Shell formatter

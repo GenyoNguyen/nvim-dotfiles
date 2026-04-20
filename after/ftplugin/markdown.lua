@@ -5,6 +5,9 @@ set.spell = true -- Enable spell checking
 set.linebreak = true
 set.wrap = true
 
+-- set.conceallevel = 2
+-- set.concealcursor = "nc"
+
 local color1_bg = "#ff757f"
 local color2_bg = "#4fd6be"
 local color3_bg = "#7dcfff"
