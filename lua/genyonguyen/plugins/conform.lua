@@ -26,13 +26,6 @@ return {
 				},
 			},
 			formatters_by_ft = {
-				javascript = { "prettierd" },
-				typescript = { "prettierd" },
-				javascriptreact = { "prettierd" },
-				typescriptreact = { "prettierd" },
-				css = { "prettierd" },
-				html = { "prettierd" },
-				svelte = { "prettierd" },
 				json = { "prettierd" },
 				yaml = { "prettierd" },
 				lua = { "stylua" },

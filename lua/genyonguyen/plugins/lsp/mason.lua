@@ -5,11 +5,7 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"lua_ls", -- Lua LSP
-				"ts_ls", -- TypeScript LSP
 				"rust_analyzer", -- Rust LSP
-				"tailwindcss", -- Tailwind CSS LSP
-				"html", -- HTML LSP
-				"cssls", -- CSS LSP
 				-- "ruff", -- Python LSP
 			},
 		},
@@ -35,14 +31,13 @@ return {
 			ensure_installed = {
 				-- Formatters (for conform.nvim and general use)
 				"stylua",
-				"prettier",
+				"prettierd",
 				"black",
 				"isort",
 				"latexindent",
 				"bibtex-tidy",
 
 				-- Linters and diagnostics
-				"eslint_d",
 				"luacheck", -- Lua linting
 
 				-- Additional useful tools
